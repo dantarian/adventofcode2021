@@ -5,20 +5,20 @@ func CountIncreasing(data []int) int {
 }
 
 func CountIncreasingWindowed(data []int, windowSize int) int {
-	last := 1000000
+	previous := 1000000
 	count := 0
 	window := 0
 	for i, value := range data {
 		window += value
-		if i < windowSize {
-			last = window
-		} else {
+
+		if i >= windowSize {
 			window -= data[i-windowSize]
-			if window > last {
+			if window > previous {
 				count++
 			}
-			last = window
 		}
+
+		previous = window
 	}
 
 	return count
